@@ -50,6 +50,9 @@ func Fill(flagSet *flag.FlagSet, v reflect.Value, prefix string) {
 			flagSet.String(f.Name, f.Value, f.Usage)
 		case reflect.Bool:
 			flagSet.Bool(f.Name, f.Value == "true", f.Usage)
+		case reflect.Int:
+			integer, _ := strconv.Atoi(f.Value)
+			flagSet.Int(f.Name, integer, f.Usage)
 		case reflect.Slice:
 			var items []string
 			if strings.Contains(f.Value, "||") {
@@ -100,6 +103,10 @@ func Extract(flagSet *flag.FlagSet, v reflect.Value, prefix string) {
 		case reflect.Bool:
 			if b, err := flagSet.GetBool(f); err == nil {
 				field.SetBool(b)
+			}
+		case reflect.Int:
+			if j, err := flagSet.GetInt(f); err == nil {
+				field.SetInt(int64(j))
 			}
 		case reflect.Slice:
 			switch fieldType.Type.Elem().Kind() {

@@ -7,11 +7,11 @@ import (
 )
 
 type Building struct {
-	Location    string   `flag:""`  // set defaults (i.e name=location, value="", description="")
-	Temperature int   `flag:"-"` // ignore this field
+	Location    string   `flag:""`  // set defaults (i.e name=location, value="", usage="")
+	Temperature int      `flag:"-"` // ignore this field
 	IsOnFire    bool     `flag:"name=on-fire, value=false"`
 	RoomNames   []string `flag:"value=Human Resources||Engineering||Administration"`
-	Floors      []int    `flag:"description=List of each floor number in this building"`
+	Floors      []int    `flag:"usage=List of each floor number in this building"`
 }
 
 func TestFill(t *testing.T) {
@@ -60,7 +60,7 @@ func TestExtract(t *testing.T) {
 
 	Fill(flagSet, reflect.ValueOf(Building{}), "")
 
-	Extract(flagSet,  reflect.ValueOf(&b).Elem(), "")
+	Extract(flagSet, reflect.ValueOf(&b).Elem(), "")
 
 	if b.Location != "" {
 		t.Error("invalid location")
