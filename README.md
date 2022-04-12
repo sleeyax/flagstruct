@@ -1,3 +1,5 @@
+**NO LONGER MAINTAINED deprecated in favor of [go-flags](https://github.com/jessevdk/go-flags)**
+
 # flagstruct
 
 Write command line flags within your struct by utilizing tags like a pro.
